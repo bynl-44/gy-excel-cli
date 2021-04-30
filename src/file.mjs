@@ -16,7 +16,10 @@ const { isEmpty } = lodash;
  */
 function readFile(path) {
   if (!isExcel(path)) {
-    new Error('文件类型错误');
+    const err = new Error();
+    err.code = 'path';
+    err.message = '文件类型错误';
+    throw err;
   }
   const buf = fs.readFileSync(path);
   const workbook = xlsx.read(buf, { type: 'buffer' });
