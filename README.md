@@ -4,10 +4,10 @@ A simple CLI to convert the file from Excel to another Excel for gy.
 
 ---
 
-## Install
+## Installation
 
 ```bash
-
+npm -g install gy-excel-cli
 ```
 
 ## Usage
