@@ -4,7 +4,7 @@
   "description": "A simple CLI to convert the file from Excel to another Excel for gy.",
   "main": "index.js",
   "bin": {
-    "gy": "bin/gy.mjs"
+    "gy": "bin/gy.js"
   },
   "author": "bynl-44 <xyxcnnh@aliyun.com>",
   "license": "MIT",

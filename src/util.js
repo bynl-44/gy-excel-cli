@@ -1,14 +1,14 @@
-import chalk from 'chalk';
-import xlsx from 'xlsx';
+const chalk = require('chalk');
+const xlsx = require('xlsx');
 
-export const SUCCESS = 'success';
-export const INFO = 'info';
-export const WARNING = 'warning';
-export const ERROR = 'error';
+const SUCCESS = 'success';
+const INFO = 'info';
+const WARNING = 'warning';
+const ERROR = 'error';
 
 const XLSX = 'xlsx';
 
-export const MONTHS = [
+const MONTHS = [
   'C:1月',
   'D:2月',
   'E:3月',
@@ -30,7 +30,7 @@ export const MONTHS = [
  * @param {string} message 消息内容
  * @returns
  */
-export const message = (status = INFO, message) => {
+const message = (status = INFO, message) => {
   if (status === INFO) {
     return `[${status}] ${message}`;
   }
@@ -45,7 +45,7 @@ export const message = (status = INFO, message) => {
   }
 };
 
-export const isExcel = (path) => {
+const isExcel = (path) => {
   const suffix = path.substring(path.lastIndexOf('.') + 1);
   return suffix === XLSX;
 };
@@ -56,7 +56,7 @@ export const isExcel = (path) => {
  * @param {Array} cells
  * @returns {Array}
  */
-export const cellSort = (cells) => {
+const cellSort = (cells) => {
   return Object.keys(cells)
     .filter((cell) => {
       // 获取单元格编号（如：第一个单元格为A1)
@@ -85,7 +85,7 @@ export const cellSort = (cells) => {
  * @param {xlsx.Sheet} sheet
  * @returns
  */
-export const formatData = (sheet) => {
+const formatData = (sheet) => {
   const _array = [];
   const cells = cellSort(sheet);
   // 获取行号
@@ -111,7 +111,7 @@ export const formatData = (sheet) => {
   return _array;
 };
 
-export function errorHandler(err) {
+function errorHandler(err) {
   const pathReg = /TypeError: path/;
   const code = err.code || '';
   const msg = err.message;
@@ -121,4 +121,15 @@ export function errorHandler(err) {
   console.log(err);
 }
 
-export default {};
+module.exports = {
+  SUCCESS,
+  INFO,
+  WARNING,
+  ERROR,
+  MONTHS,
+  message,
+  isExcel,
+  cellSort,
+  formatData,
+  errorHandler,
+};

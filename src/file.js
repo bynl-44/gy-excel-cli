@@ -1,10 +1,9 @@
-import lodash from 'lodash';
-import inquirer from 'inquirer';
-import fs from 'fs';
-import xlsx from 'xlsx';
-import { message, isExcel, INFO, SUCCESS } from './util.mjs';
-import { formatData } from './util.mjs';
-import { strip, times } from 'number-precision';
+const lodash = require('lodash');
+const inquirer = require('inquirer');
+const fs = require('fs');
+const xlsx = require('xlsx');
+const { message, isExcel, INFO, SUCCESS, formatData } = require('./util');
+const { times } = require('number-precision');
 
 const { isEmpty } = lodash;
 
@@ -98,7 +97,7 @@ async function checkToFile(to) {
   return readFile(to);
 }
 
-export async function checkFiles(from, to) {
+async function checkFiles(from, to) {
   const fromWB = await checkFromFile(from);
   console.log(message(SUCCESS, 'From文件数据检查完成！'));
   console.log(message(INFO, '开始检查To文件数据...'));
@@ -108,14 +107,14 @@ export async function checkFiles(from, to) {
   return { fromWB, toWB };
 }
 
-export function analyzeFiles(from, to) {
+function analyzeFiles(from, to) {
   const fromSheets = analyzeFromData(from);
   const toSheet = analyzeToData(to);
 
   return { fromSheets, toSheet };
 }
 
-export function calculate(from, to, month) {
+function calculate(from, to, month) {
   const { personalPerformances, personalOutputs } = from;
   const column = month.substring(0, 1);
 
@@ -141,7 +140,7 @@ export function calculate(from, to, month) {
       personalPerformances.map((performance, i) => {
         const performanceNo = performance[`A${i + 2}`];
         if (jobNo === performanceNo) {
-          row[shouldCell] = strip(parseFloat(performance[`Q${i + 2}`]));
+          row[shouldCell] = parseFloat(performance[`Q${i + 2}`]);
         }
       });
     }
@@ -152,7 +151,7 @@ export function calculate(from, to, month) {
   return calculatedTo;
 }
 
-export function writeFile(toSheet, toWB, fileName = '矿山院月终.xlsx') {
+function writeFile(toSheet, toWB, fileName = '矿山院月终.xlsx') {
   let sheet = toWB.Sheets[toWB.SheetNames[0]];
   sheet = { ...sheet, ...toSheet };
   toWB.Sheets[toWB.SheetNames[0]] = sheet;
@@ -160,4 +159,4 @@ export function writeFile(toSheet, toWB, fileName = '矿山院月终.xlsx') {
   xlsx.writeFile(toWB, fileName);
 }
 
-export default {};
+module.exports = { checkFiles, analyzeFiles, calculate, writeFile };

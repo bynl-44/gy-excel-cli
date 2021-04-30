@@ -1,22 +1,29 @@
 #!/usr/bin/env node
 
-import { Command } from 'commander';
-import inquirer from 'inquirer';
-import {
+const { Command } = require('commander');
+const inquirer = require('inquirer');
+const {
   checkFiles,
   analyzeFiles,
   calculate,
   writeFile,
-} from '../src/file.mjs';
-import { message, INFO, SUCCESS, MONTHS, errorHandler } from '../src/util.mjs';
-import moment from 'moment';
-import _ from 'lodash';
+} = require('../src/file.js');
+const {
+  INFO,
+  SUCCESS,
+  MONTHS,
+  errorHandler,
+  message,
+} = require('../src/util.js');
+const moment = require('moment');
+const _ = require('lodash');
+const pkg = require('../package.json');
 
 const { isEmpty } = _;
 
 const program = new Command();
 
-program.version('1.0.0');
+program.version(pkg.version);
 
 program
   .arguments('[from] [to]')
