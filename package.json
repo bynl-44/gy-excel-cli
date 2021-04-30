@@ -1,0 +1,20 @@
+{
+  "name": "gy-excel-cli",
+  "version": "1.0.0",
+  "description": "A simple CLI to convert the file from Excel to another Excel for gy.",
+  "main": "index.js",
+  "bin": {
+    "gy": "bin/gy.mjs"
+  },
+  "author": "bynl-44 <xyxcnnh@aliyun.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^7.2.0",
+    "inquirer": "^8.0.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "number-precision": "^1.5.0",
+    "xlsx": "^0.16.9"
+  }
+}

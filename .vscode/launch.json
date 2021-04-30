@@ -1,0 +1,22 @@
+{
+  // 使用 IntelliSense 了解相关属性。 
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "调试 gy from to",
+      "runtimeExecutable": "gy",
+      "request": "launch",
+      "skipFiles": [
+        "${workspaceFolder}/node_modules/**/*.js",
+        "<node_internals>/**"
+      ],
+      "type": "node",
+      "args": [
+        "${workspaceFolder}/public/2021年矿山院员工合计产值.xlsx",
+        "${workspaceFolder}/public/矿山院2021.02月终.xlsx"
+      ]
+    }
+  ]
+}
