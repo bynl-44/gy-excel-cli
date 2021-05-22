@@ -4,6 +4,7 @@ const fs = require('fs');
 const xlsx = require('xlsx');
 const { message, isExcel, INFO, SUCCESS, formatData } = require('./util');
 const { times } = require('number-precision');
+const { isNumber } = require('lodash');
 
 const { isEmpty } = lodash;
 
@@ -153,7 +154,32 @@ function calculate(from, to, month) {
 
 function writeFile(toSheet, toWB, fileName = '矿山院月终.xlsx') {
   let sheet = toWB.Sheets[toWB.SheetNames[0]];
+  toSheet = toSheet.map((row) => {
+    for (const key in row) {
+      if (Object.hasOwnProperty.call(row, key)) {
+        const cell = row[key];
+        if (isNumber(cell)) {
+          row[key] = { t: 'n', v: cell };
+        } else {
+          row[key] = { t: 's', v: cell };
+        }
+      }
+    }
+    return row;
+  });
+  toSheet = Object.assign(...toSheet);
   sheet = { ...sheet, ...toSheet };
+  for (const key in sheet) {
+    if (Object.hasOwnProperty.call(sheet, key)) {
+      const cell = sheet[key];
+      if (key.startsWith('C')) {
+        continue;
+      }
+      if (!isNaN(parseFloat(cell.v))) {
+        cell.t = 'n';
+      }
+    }
+  }
   toWB.Sheets[toWB.SheetNames[0]] = sheet;
 
   xlsx.writeFile(toWB, fileName);

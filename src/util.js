@@ -100,7 +100,7 @@ const formatData = (sheet) => {
         // 取出该行每一个单元格里的数据
         const row = parseInt(cell.substring(1));
         if (id === row) {
-          person[cell] = sheet[cell].v;
+          person[cell] = sheet[cell].w;
         }
       });
 
