@@ -1,6 +1,6 @@
 {
   "name": "gy-excel-cli",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A simple CLI to convert the file from Excel to another Excel for gy.",
   "main": "index.js",
   "bin": {
